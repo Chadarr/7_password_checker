@@ -20,7 +20,7 @@ def has_upper_letters(password: str):
 
 
 def has_lower_letters(password: str):
-    return any(letter.isalpha() for letter in password)
+    return any(letter.islower() for letter in password)
 
 
 def is_symbol(letter: str):
