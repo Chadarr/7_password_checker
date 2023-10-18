@@ -1,7 +1,5 @@
 import urwid
 
-reply = urwid.Text("")
-
 
 def has_digit(password: str):
     return any(letter.isdigit() for letter in password)
@@ -46,15 +44,16 @@ def pass_rating(password: str):
     return rating
 
 
-def on_ask_change(edit, new_edit_text):
+def on_ask_change(edit, new_edit_text, reply):
     reply.set_text(f"Рейтинг пароля: {pass_rating(new_edit_text)}")
 
 
 def main():
+    reply = urwid.Text("")
     ask = urwid.Edit("Введите пароль: ", mask="*")
     menu = urwid.Pile([ask, reply])
     menu = urwid.Filler(menu, valign="top")
-    urwid.connect_signal(ask, "change", on_ask_change)
+    urwid.connect_signal(ask, "change", on_ask_change, reply)
     urwid.MainLoop(menu).run()
 
 
